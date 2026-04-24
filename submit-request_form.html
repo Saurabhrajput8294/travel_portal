@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit Travel Request</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-icon"></div>
+          <div class="logo-text">Travel Portal</div>
+          <div class="logo-subtext">Request Management</div>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <i class="fas fa-home"></i>
+              <a href="index.html">Home</a>
+            </li>
+          </ul>
+          <div class="nav-section-title">TRAVEL REQUESTS</div>
+          <ul>
+            <li class="active">
+              <i class="fas fa-paper-plane"></i>
+              <a href="submit-request_form.html">Submit Request</a>
+            </li>
+            <li>
+              <i class="fas fa-location-arrow"></i>
+              <a href="#">Track Request</a>
+            </li>
+            <li>
+              <i class="fas fa-file-alt"></i>
+              <a href="#">Approval Form</a>
+            </li>
+            <li>
+              <i class="fas fa-chart-bar"></i>
+              <a href="#">Reports</a>
+            </li>
+          </ul>
+          <div class="nav-section-title">PROFILE</div>
+          <ul>
+            <li>
+              <i class="fas fa-user-circle"></i>
+              <a href="#">View Profile</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="sidebar-footer">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="main-header">
+          <i class="fas fa-bars"></i>
+          <h1>Submit Travel Request</h1>
+        </header>
+
+        <p class="form-description">
+          Fill out the form below to submit your official travel request
+        </p>
+
+        <section class="travel-form-container">
+          <div class="travel-form-card">
+            <h2 class="form-title">Travel Request Form</h2>
+            <p class="form-instructions">
+              Please provide all required information for your travel request.
+              All fields marked with * are mandatory.
+            </p>
+            <form action="#">
+              <div class="form-section-title">Employee Details</div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="employee-name">Employee Name *</label>
+                  <input
+                    type="text"
+                    id="employee-name"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="employee-id">Employee ID *</label>
+                  <input
+                    type="text"
+                    id="employee-id"
+                    placeholder="Enter your employee ID"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="department">Department *</label>
+                  <select id="department">
+                    <option value="">Select your department</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-section-title">Travel Details</div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="trip-type">Trip Type *</label>
+                  <select id="trip-type">
+                    <option value="">Select trip type</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="origin">Origin *</label>
+                  <input
+                    type="text"
+                    id="origin"
+                    placeholder="City, State/Country"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="destination">Destination *</label>
+                  <input
+                    type="text"
+                    id="destination"
+                    placeholder="City, State/Country"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="departure-date">Departure Date *</label>
+                  <input type="date" id="departure-date" />
+                </div>
+                <div class="form-group">
+                  <label for="return-date">Return Date *</label>
+                  <input type="date" id="return-date" />
+                </div>
+              </div>
+
+              <div class="form-section-title">Purpose of Travel</div>
+              <div class="form-group full-width">
+                <label for="travel-purpose">Purpose of Travel *</label>
+                <textarea
+                  id="travel-purpose"
+                  rows="3"
+                  placeholder="Describe the business purpose of your travel"
+                ></textarea>
+              </div>
+
+              <div class="form-section-title">Services Required</div>
+              <div class="form-group full-width">
+                <label>Select the services you need for your trip *</label>
+                <div class="checkbox-group">
+                  <label
+                    ><input type="checkbox" name="services" value="hotel" />
+                    Hotel</label
+                  >
+                  <label
+                    ><input type="checkbox" name="services" value="flight" />
+                    Flight</label
+                  >
+                  <label
+                    ><input
+                      type="checkbox"
+                      name="services"
+                      value="car-rental"
+                    />
+                    Car Rental</label
+                  >
+                  <label
+                    ><input type="checkbox" name="services" value="train" />
+                    Train</label
+                  >
+                  <label
+                    ><input type="checkbox" name="services" value="bus" />
+                    Bus</label
+                  >
+                </div>
+              </div>
+
+              <div class="form-section-title">Financial Details</div>
+              <div class="financial-info-box">
+                <i class="fas fa-dollar-sign"></i>
+                <div class="info-content">
+                  <h4>Cost Center & Billing Information</h4>
+                  <p>
+                    Please provide cost center and billing details for financial
+                    tracking and processing
+                  </p>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="cost-center">Cost Center *</label>
+                  <select id="cost-center">
+                    <option value="">Select cost center</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="billable">Billable *</label>
+                  <select id="billable">
+                    <option value="">Select billing status</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

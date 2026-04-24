@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Travel Portal Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap 5 CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <style>
+      body {
+        background: #fff;
+      }
+      .sidebar {
+        background: linear-gradient(180deg, #e96443 0%, #904e95 100%);
+        color: #fff;
+        min-height: 100vh;
+        width: 250px;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .sidebar .sidebar-inner {
+        padding: 32px 24px 24px 24px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .sidebar .logo-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+      }
+      .sidebar .logo-section .bi {
+        font-size: 2rem;
+        margin-right: 10px;
+        color: #fff;
+        opacity: 0.85;
+      }
+      .sidebar .logo-title {
+        font-weight: 700;
+        font-size: 1.25rem;
+        line-height: 1.1;
+      }
+      .sidebar .logo-desc {
+        font-size: 0.95rem;
+        opacity: 0.85;
+      }
+      .sidebar-section-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #fff;
+        opacity: 0.7;
+        margin-bottom: 8px;
+        margin-top: 24px;
+        text-transform: uppercase;
+      }
+      .sidebar .nav-link {
+        color: #fff;
+        opacity: 0.95;
+        font-size: 1rem;
+        padding: 8px 12px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        transition: background 0.2s;
+      }
+      .sidebar .nav-link .bi {
+        font-size: 1.15rem;
+        margin-right: 10px;
+        opacity: 0.85;
+      }
+      .sidebar .nav-link.active,
+      .sidebar .nav-link:hover {
+        background: rgba(255, 255, 255, 0.13);
+        color: #fff;
+        opacity: 1;
+      }
+      .sidebar .bottom-links {
+        margin-top: 32px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 16px;
+      }
+      .main-content {
+        margin-left: 250px;
+        padding: 40px 40px 0 40px;
+        min-height: 100vh;
+        background: #fafbfc;
+      }
+      .dashboard-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 8px;
+      }
+      .dashboard-header .icon {
+        font-size: 2rem;
+        color: #e96443;
+      }
+      .dashboard-header .title {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+      .dashboard-header .badge {
+        background: linear-gradient(90deg, #e96443 0%, #904e95 100%);
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 1rem;
+        padding: 0.5rem 1.2rem;
+        margin-left: auto;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+      .dashboard-desc {
+        color: #6c757d;
+        margin-bottom: 32px;
+        font-size: 1.08rem;
+      }
+      .features-row {
+        display: flex;
+        justify-content: center;
+        gap: 18px; /* Reduced gap */
+        margin-bottom: 32px;
+        flex-wrap: nowrap; /* Prevent wrapping */
+        overflow-x: auto; /* Allow horizontal scroll on small screens */
+      }
+      .card-feature {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        text-align: center;
+        padding: 24px 10px 18px 10px; /* Reduced padding */
+        min-width: 170px; /* Reduced min width */
+        max-width: 180px; /* Reduced max width */
+        background: #fff;
+        flex: 1 1 170px;
+        margin: 0 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 210px; /* Reduced height */
+      }
+      .card-feature .icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+        color: #e96443;
+        background: #fff5f0;
+        border-radius: 50%;
+        padding: 0.6rem;
+        display: inline-block;
+      }
+      .card-feature .fw-bold {
+        font-size: 1.05rem;
+        margin-bottom: 6px;
+      }
+      .card-feature .desc {
+        color: #6c757d;
+        font-size: 0.93rem;
+        margin-bottom: 10px;
+        min-height: 40px;
+      }
+      .card-feature .btn {
+        background: linear-gradient(90deg, #e96443 0%, #904e95 100%);
+        color: #fff;
+        border: none;
+        margin-top: auto;
+        font-size: 0.93rem;
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 5px 12px;
+        transition: opacity 0.2s;
+      }
+      .card-feature .btn:hover {
+        opacity: 0.92;
+      }
+      .stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+      }
+      .stats-card {
+        border: none;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        border-radius: 16px;
+        text-align: center;
+        padding: 28px 0 18px 0;
+        min-width: 220px;
+        max-width: 260px;
+        flex: 1 1 220px;
+        margin: 0 8px;
+        border-top: 4px solid #e96443;
+      }
+      .stats-title {
+        color: #e96443;
+        font-weight: 500;
+        font-size: 1.07rem;
+        margin-bottom: 6px;
+      }
+      .stats-value {
+        font-size: 2.1rem;
+        font-weight: 700;
+        margin-top: 0.5rem;
+        color: #222;
+      }
+      .stats-title.orange {
+        color: #ff7e5f;
+      }
+      .stats-title.purple {
+        color: #904e95;
+      }
+      @media (max-width: 991px) {
+        .main-content {
+          margin-left: 0;
+          padding: 24px 8px 0 8px;
+        }
+        .sidebar {
+          position: static;
+          width: 100%;
+          min-height: auto;
+          height: auto;
+        }
+        .sidebar .sidebar-inner {
+          height: auto;
+        }
+        .features-row,
+        .stats-row {
+          flex-direction: column;
+          gap: 18px;
+          align-items: stretch;
+        }
+        .card-feature,
+        .stats-card {
+          margin: 0 auto 18px auto;
+          min-width: 0;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar position-fixed top-0 start-0 h-100 d-flex flex-column">
+      <div class="sidebar-inner">
+        <div>
+          <div class="logo-section">
+            <span class="bi bi-geo-alt-fill"></span>
+            <div>
+              <div class="logo-title">Travel Portal</div>
+              <div class="logo-desc">Request Management</div>
+            </div>
+          </div>
+          <div>
+            <div class="sidebar-section-title">Dashboard</div>
+            <a href="#" class="nav-link active"
+              ><i class="bi bi-house-door"></i> Home</a
+            >
+            <div class="sidebar-section-title">Travel Requests</div>
+            <a href="#" class="nav-link"
+              ><i class="bi bi-file-earmark-plus"></i> Submit Request</a
+            >
+            <a href="#" class="nav-link"
+              ><i class="bi bi-search"></i> Track Request</a
+            >
+            <a href="#" class="nav-link"
+              ><i class="bi bi-check2-square"></i> Approval Form</a
+            >
+            <a href="#" class="nav-link"
+              ><i class="bi bi-bar-chart-line"></i> Reports</a
+            >
+            <div class="sidebar-section-title">Profile</div>
+            <a href="#" class="nav-link"
+              ><i class="bi bi-person"></i> View Profile</a
+            >
+          </div>
+        </div>
+        <div class="bottom-links">
+          <a href="#" class="nav-link"><i class="bi bi-gear"></i> Settings</a>
+          <a href="#" class="nav-link"
+            ><i class="bi bi-box-arrow-right"></i> Logout</a
+          >
+        </div>
+      </div>
+    </div>
+    <main class="main-content">
+      <!-- Dashboard Content -->
+      <div id="dashboard-content">
+        <!-- ...existing dashboard content... -->
+        <div class="dashboard-header">
+          <span class="icon bi bi-columns-gap"></span>
+          <span class="title">Dashboard</span>
+          <span class="badge">Official Travel Request System</span>
+        </div>
+        <div class="dashboard-desc">
+          Streamline your travel request process with our comprehensive
+          management system. Submit, track, approve, and analyze travel requests
+          all in one place.
+        </div>
+        <div class="features-row">
+          <div class="card card-feature">
+            <span class="icon bi bi-file-earmark-text"></span>
+            <div class="fw-bold">Submit Request</div>
+            <div class="desc">
+              Create a new official travel request with all required details
+            </div>
+            <button class="btn btn-sm" onclick="showForm()">
+              Access Submit Request
+            </button>
+          </div>
+          <div class="card card-feature">
+            <span class="icon bi bi-search"></span>
+            <div class="fw-bold">Track Request</div>
+            <div class="desc">
+              Monitor the status and progress of your submitted travel requests
+            </div>
+            <button class="btn btn-sm" onclick="showTrackRequests()">
+              Access Track Request
+            </button>
+          </div>
+          <div class="card card-feature">
+            <span class="icon bi bi-check2-square"></span>
+            <div class="fw-bold">Approval Form</div>
+            <div class="desc">
+              Review and approve pending travel requests from team members
+            </div>
+            <button class="btn btn-sm">Access Approval Form</button>
+          </div>
+          <div class="card card-feature">
+            <span class="icon bi bi-bar-chart-line"></span>
+            <div class="fw-bold">Reports</div>
+            <div class="desc">
+              View comprehensive reports and analytics on travel requests
+            </div>
+            <button class="btn btn-sm">Access Reports</button>
+          </div>
+          <div class="card card-feature">
+            <span class="icon bi bi-person"></span>
+            <div class="fw-bold">View Profile</div>
+            <div class="desc">
+              Check your personal details, manager information, and
+              organizational data
+            </div>
+            <button class="btn btn-sm">Access View Profile</button>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stats-card">
+            <div class="stats-title orange">Pending Requests</div>
+            <div class="stats-value">12</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-title purple">Approved This Month</div>
+            <div class="stats-value">48</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-title orange">Average Processing Time</div>
+            <div class="stats-value">2.3 days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Request Form (hidden by default) -->
+      <div id="submit-request-form" style="display: none">
+        <div class="dashboard-header">
+          <span class="icon bi bi-columns-gap"></span>
+          <span class="title">Submit Travel Request</span>
+        </div>
+        <div class="dashboard-desc">
+          Fill out the form below to submit your official travel request
+        </div>
+        <div
+          class="card p-4"
+          style="max-width: 900px; margin: auto; border-radius: 18px"
+        >
+          <div class="mb-4">
+            <div class="fw-bold fs-5 mb-1">Travel Request Form</div>
+            <div class="text-muted" style="font-size: 1rem">
+              Please provide all required information for your travel request.
+              All fields marked with * are mandatory.
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Employee Name *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your full name"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Employee ID *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your employee ID"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Department *</label>
+              <select class="form-select">
+                <option>Select your department</option>
+              </select>
+            </div>
+          </div>
+          <hr />
+          <div class="mb-3 fw-bold">Travel Details</div>
+          <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Request Type *</label>
+              <select class="form-select">
+                <option>Select request type</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Trip Type *</label>
+              <select class="form-select">
+                <option>Select trip type</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Origin *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="City, State/Country"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Destination *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="City, State/Country"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Departure Date *</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Return Date *</label>
+              <input type="date" class="form-control" />
+            </div>
+          </div>
+          <hr />
+          <div class="mb-3 fw-bold">Services Required</div>
+          <div class="mb-3">
+            <label class="mb-2"
+              >Select the services you need for your trip *</label
+            >
+            <div class="row">
+              <div class="col-6 col-md-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="hotel" />
+                  <label class="form-check-label" for="hotel">Hotel</label>
+                </div>
+              </div>
+              <div class="col-6 col-md-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="flight" />
+                  <label class="form-check-label" for="flight">Flight</label>
+                </div>
+              </div>
+              <div class="col-6 col-md-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="car" />
+                  <label class="form-check-label" for="car">Car Rental</label>
+                </div>
+              </div>
+              <div class="col-6 col-md-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="train" />
+                  <label class="form-check-label" for="train">Train</label>
+                </div>
+              </div>
+              <div class="col-6 col-md-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="bus" />
+                  <label class="form-check-label" for="bus">Bus</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="mb-3 fw-bold text-success">
+            <i class="bi bi-currency-dollar"></i> Financial Details
+          </div>
+          <div class="alert alert-success mb-3" style="background: #eafbe7">
+            <div class="fw-bold">
+              <span class="text-success">&#9679;</span> Cost Center & Billing
+              Information
+            </div>
+            <div class="text-success">
+              Please provide cost center and billing details for financial
+              tracking and processing
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Cost Center *</label>
+              <select class="form-select">
+                <option>Select cost center</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="fw-bold">Billable *</label>
+              <select class="form-select">
+                <option>Select billing status</option>
+              </select>
+            </div>
+            <div class="col-md-12 mb-3">
+              <label class="fw-bold">Bill to Department *</label>
+              <select class="form-select">
+                <option>Select department to be billed</option>
+              </select>
+            </div>
+          </div>
+          <div class="text-end">
+            <button class="btn btn-secondary" onclick="showDashboard()">
+              Cancel
+            </button>
+            <button class="btn btn-primary">Submit Request</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Track Requests Content (hidden by default) -->
+      <div id="track-requests-content" style="display: none">
+        <div class="dashboard-header">
+          <span class="icon bi bi-search"></span>
+          <span class="title">Track Requests</span>
+        </div>
+        <div class="dashboard-desc">
+          Monitor the status and progress of your travel requests
+        </div>
+        <div class="card p-4 mb-3" style="border-radius: 16px">
+          <div class="fw-bold mb-2">Search Requests</div>
+          <div class="text-muted mb-3" style="font-size: 1rem">
+            Search by request ID, destination, or purpose
+          </div>
+          <div class="row align-items-end">
+            <div class="col-md-8 mb-2">
+              <label class="fw-bold">Search Term</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter request ID, destination, or purpose..."
+              />
+            </div>
+            <div class="col-md-4 mb-2 text-end">
+              <button class="btn" style="background: #e96443; color: #fff">
+                <i class="bi bi-search"></i> Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card p-4 mb-3" style="border-radius: 16px">
+          <div class="fw-bold mb-2">Your Travel Requests</div>
+          <div class="text-muted mb-3" style="font-size: 1rem">
+            4 request(s) found
+          </div>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Destination</th>
+                  <th>Purpose</th>
+                  <th>Status</th>
+                  <th>Submit Date</th>
+                  <th>Travel Date</th>
+                  <th>Approver</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="#">TR-2024-001</a></td>
+                  <td><i class="bi bi-geo-alt"></i> New York, NY</td>
+                  <td>Client Meeting</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-danger"
+                      style="color: #e96443; background: #ffeaea"
+                      >Approved</span
+                    >
+                  </td>
+                  <td><i class="bi bi-calendar"></i> 2024-03-01</td>
+                  <td><i class="bi bi-clock"></i> 2024-03-15</td>
+                  <td>John Smith</td>
+                </tr>
+                <tr>
+                  <td><a href="#">TR-2024-002</a></td>
+                  <td><i class="bi bi-geo-alt"></i> San Francisco, CA</td>
+                  <td>Conference Attendance</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-warning"
+                      style="color: #e9a23b; background: #fff7e0"
+                      >Pending</span
+                    >
+                  </td>
+                  <td><i class="bi bi-calendar"></i> 2024-03-05</td>
+                  <td><i class="bi bi-clock"></i> 2024-03-20</td>
+                  <td>Sarah Johnson</td>
+                </tr>
+                <tr>
+                  <td><a href="#">TR-2024-003</a></td>
+                  <td><i class="bi bi-geo-alt"></i> Chicago, IL</td>
+                  <td>Training Workshop</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-warning"
+                      style="color: #e96443; background: #fff3e0"
+                      >Under Review</span
+                    >
+                  </td>
+                  <td><i class="bi bi-calendar"></i> 2024-03-08</td>
+                  <td><i class="bi bi-clock"></i> 2024-03-25</td>
+                  <td>Mike Davis</td>
+                </tr>
+                <tr>
+                  <td><a href="#">TR-2024-004</a></td>
+                  <td><i class="bi bi-geo-alt"></i> Austin, TX</td>
+                  <td>Team Building</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-danger"
+                      style="color: #d9534f; background: #ffeaea"
+                      >Rejected</span
+                    >
+                  </td>
+                  <td><i class="bi bi-calendar"></i> 2024-02-28</td>
+                  <td><i class="bi bi-clock"></i> 2024-03-12</td>
+                  <td>Lisa Wilson</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- You can add the stats cards here if needed -->
+      </div>
+      <!-- Approval Management Content (hidden by default) -->
+      <div id="approval-content" style="display: none">
+        <div class="dashboard-header">
+          <span class="icon bi bi-check2-square"></span>
+          <span class="title">Approval Management</span>
+        </div>
+        <div class="dashboard-desc">
+          Review and approve pending travel requests from your team
+        </div>
+        <div class="card p-3 mb-3" style="border-radius: 16px">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <span
+                class="badge rounded-pill"
+                style="background: #fff3e0; color: #e96443; padding: 8px 16px"
+              >
+                <i class="bi bi-dot"></i> Pending Approval Requests
+              </span>
+            </div>
+            <div class="fw-bold" style="color: #e96443; font-size: 1.1rem">
+              Total: <span style="font-size: 1.2rem">3</span>
+            </div>
+          </div>
+        </div>
+        <div class="card p-4 mb-3" style="border-radius: 16px">
+          <div class="fw-bold mb-2">Pending Approval Requests</div>
+          <div class="text-muted mb-3" style="font-size: 1rem">
+            Review travel requests requiring your approval
+          </div>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Employee</th>
+                  <th>Department</th>
+                  <th>Destination</th>
+                  <th>Travel Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color: #e96443; font-weight: 600">TR-2024-005</td>
+                  <td>
+                    <i class="bi bi-person"></i> Alice Johnson<br />
+                    <span class="text-muted" style="font-size: 0.95em"
+                      >EMP-2024-123</span
+                    >
+                  </td>
+                  <td>Marketing</td>
+                  <td><i class="bi bi-geo-alt"></i> Boston, MA</td>
+                  <td><i class="bi bi-calendar"></i> 2024-03-25</td>
+                  <td>
+                    <button class="btn btn-light border">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #e96443; font-weight: 600">TR-2024-006</td>
+                  <td>
+                    <i class="bi bi-person"></i> Robert Chen<br />
+                    <span class="text-muted" style="font-size: 0.95em"
+                      >EMP-2024-456</span
+                    >
+                  </td>
+                  <td>Engineering</td>
+                  <td><i class="bi bi-geo-alt"></i> Seattle, WA</td>
+                  <td><i class="bi bi-calendar"></i> 2024-04-01</td>
+                  <td>
+                    <button class="btn btn-light border">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #e96443; font-weight: 600">TR-2024-007</td>
+                  <td>
+                    <i class="bi bi-person"></i> Maria Rodriguez<br />
+                    <span class="text-muted" style="font-size: 0.95em"
+                      >EMP-2024-789</span
+                    >
+                  </td>
+                  <td>Sales</td>
+                  <td><i class="bi bi-geo-alt"></i> Miami, FL</td>
+                  <td><i class="bi bi-calendar"></i> 2024-03-30</td>
+                  <td>
+                    <button class="btn btn-light border">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Reports & Analytics Content (hidden by default) -->
+      <div id="reports-content" style="display: none">
+        <div class="dashboard-header">
+          <span class="icon bi bi-bar-chart-line"></span>
+          <span class="title">Reports & Analytics</span>
+        </div>
+        <div class="dashboard-desc">
+          Comprehensive insights into travel requests and budget utilization
+        </div>
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+        >
+          <div style="flex: 1 1 300px; max-width: 350px">
+            <div class="card p-4 mb-3" style="border-radius: 16px">
+              <div class="d-flex align-items-center">
+                <div>
+                  <div class="fw-bold text-muted" style="font-size: 1.1rem">
+                    Total Requests
+                  </div>
+                  <div class="fs-3 fw-bold mb-1">156</div>
+                  <div class="text-danger" style="font-size: 1rem">
+                    <i class="bi bi-arrow-up-right"></i> +12% from last month
+                  </div>
+                </div>
+                <div class="ms-auto">
+                  <span
+                    class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center"
+                    style="width: 48px; height: 48px"
+                  >
+                    <i
+                      class="bi bi-people"
+                      style="font-size: 2rem; color: #e96443"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 ms-auto mb-3">
+            <select class="form-select" style="width: 140px">
+              <option>All Months</option>
+            </select>
+            <select class="form-select" style="width: 100px">
+              <option>2024</option>
+            </select>
+            <button class="btn" style="background: #e96443; color: #fff">
+              <i class="bi bi-download"></i> Export
+            </button>
+          </div>
+        </div>
+        <div class="card p-4 mb-3" style="border-radius: 16px">
+          <div class="fw-bold mb-2">Recent Travel Requests</div>
+          <div class="text-muted mb-3" style="font-size: 1rem">
+            Latest submitted and processed requests
+          </div>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Employee</th>
+                  <th>Destination</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color: #e96443; font-weight: 600">TR-2024-008</td>
+                  <td>David Kim</td>
+                  <td>Denver, CO</td>
+                  <td>2024-03-14</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-danger"
+                      style="color: #e96443; background: #ffeaea"
+                      >Approved</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #e96443; font-weight: 600">TR-2024-009</td>
+                  <td>Sarah Wilson</td>
+                  <td>Portland, OR</td>
+                  <td>2024-03-13</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-danger"
+                      style="color: #e96443; background: #ffeaea"
+                      >Approved</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #e96443; font-weight: 600">TR-2024-010</td>
+                  <td>James Brown</td>
+                  <td>Las Vegas, NV</td>
+                  <td>2024-03-12</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-danger"
+                      style="color: #d9534f; background: #ffeaea"
+                      >Rejected</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #e96443; font-weight: 600">TR-2024-011</td>
+                  <td>Emma Davis</td>
+                  <td>Nashville, TN</td>
+                  <td>2024-03-11</td>
+                  <td>
+                    <span
+                      class="badge bg-light text-danger"
+                      style="color: #e96443; background: #ffeaea"
+                      >Approved</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Employee Profile Content (hidden by default) -->
+      <div id="profile-content" style="display: none">
+        <div class="dashboard-header">
+          <span class="icon bi bi-person"></span>
+          <span class="title">Employee Profile</span>
+        </div>
+        <div class="dashboard-desc">
+          View your personal and organizational details
+        </div>
+        <!-- Personal & Organizational Details -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="card p-4 h-100" style="border-radius: 24px">
+              <div class="fw-bold mb-1">
+                <span class="bg-light rounded-circle p-2 me-2"
+                  ><i class="bi bi-person" style="color: #e96443"></i
+                ></span>
+                Personal Information
+              </div>
+              <div class="text-muted mb-3" style="font-size: 1.08rem">
+                Your personal details and contact information
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Full Name</span><br />John Smith
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Employee ID</span><br />EMP-12345
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold"
+                  ><i class="bi bi-calendar"></i> Date of Birth</span
+                ><br />March 15, 1985
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold"
+                  ><i class="bi bi-telephone"></i> Mobile Number</span
+                ><br />+1 (555) 123-4567
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold"
+                  ><i class="bi bi-geo-alt"></i> Address</span
+                ><br />123 Main Street, Suite 400, New York, NY 10001, United
+                States
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-4 h-100" style="border-radius: 24px">
+              <div class="fw-bold mb-1">
+                <span class="bg-light rounded-circle p-2 me-2"
+                  ><i class="bi bi-building" style="color: #e96443"></i
+                ></span>
+                Organizational Details
+              </div>
+              <div class="text-muted mb-3" style="font-size: 1.08rem">
+                Your role and department information
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Department</span><br />Engineering
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Designation</span><br />Senior Software
+                Engineer
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold"
+                  ><i class="bi bi-credit-card"></i> Cost Center</span
+                ><br />CC-ENG-001
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Current Process Mapping</span><br />
+                <span class="badge" style="background: #fff3e0; color: #e96443"
+                  >Product Development - Mobile Application</span
+                >
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Work Location</span><br />New York Office
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Travel Preferences -->
+        <div
+          class="card p-4 mb-4"
+          style="border-radius: 24px; max-width: 90%; margin: auto"
+        >
+          <div class="fw-bold mb-1">Travel Preferences</div>
+          <div class="text-muted mb-3" style="font-size: 1.08rem">
+            Your preferred settings for business travel
+          </div>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <span class="fw-bold">Preferred Airline</span><br />Delta Airlines
+            </div>
+            <div class="col-md-4 mb-3">
+              <span class="fw-bold">Seat Preference</span><br />Aisle
+            </div>
+            <div class="col-md-4 mb-3">
+              <span class="fw-bold">Hotel Preference</span><br />4-star
+            </div>
+            <div class="col-md-4 mb-3">
+              <span class="fw-bold">Dietary Restrictions</span><br />None
+            </div>
+            <div class="col-md-8 mb-3">
+              <span class="fw-bold">Emergency Contact</span><br />Jane Smith -
+              +1 (555) 234-5678
+            </div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-secondary fw-bold">
+              Edit Profile
+            </button>
+            <button class="btn btn-outline-secondary fw-bold">
+              Update Travel Preferences
+            </button>
+            <button class="btn btn-outline-secondary fw-bold">
+              Change Password
+            </button>
+          </div>
+        </div>
+        <!-- Manager Details -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="card p-4 h-100" style="border-radius: 24px">
+              <div class="fw-bold mb-1">Primary Manager</div>
+              <div class="text-muted mb-3" style="font-size: 1.08rem">
+                Your direct reporting manager
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Name</span><br />Sarah Johnson
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Designation</span><br />Engineering
+                Manager
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Email</span
+                ><br />sarah.johnson@company.com
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Phone</span><br />+1 (555) 987-6543
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Manager Since</span><br />January 2022
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-4 h-100" style="border-radius: 24px">
+              <div class="fw-bold mb-1">Admin Manager</div>
+              <div class="text-muted mb-3" style="font-size: 1.08rem">
+                Administrative and approval authority
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Name</span><br />Michael Davis
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Designation</span><br />Senior Director -
+                Engineering
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Email</span
+                ><br />michael.davis@company.com
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Phone</span><br />+1 (555) 456-7890
+              </div>
+              <div class="mb-2">
+                <span class="fw-bold">Department</span><br />Engineering
+                Leadership
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      <!-- Place this inside your <script> tag -->
+
+      function showDashboard() {
+        document.getElementById("dashboard-content").style.display = "block";
+        document.getElementById("submit-request-form").style.display = "none";
+        document.getElementById("track-requests-content").style.display =
+          "none";
+        document.getElementById("approval-content").style.display = "none";
+        document.getElementById("reports-content").style.display = "none";
+        document.getElementById("profile-content").style.display = "none";
+      }
+      function showForm() {
+        document.getElementById("dashboard-content").style.display = "none";
+        document.getElementById("submit-request-form").style.display = "block";
+        document.getElementById("track-requests-content").style.display =
+          "none";
+        document.getElementById("approval-content").style.display = "none";
+        document.getElementById("reports-content").style.display = "none";
+        document.getElementById("profile-content").style.display = "none";
+      }
+      function showTrackRequests() {
+        document.getElementById("dashboard-content").style.display = "none";
+        document.getElementById("submit-request-form").style.display = "none";
+        document.getElementById("track-requests-content").style.display =
+          "block";
+        document.getElementById("approval-content").style.display = "none";
+        document.getElementById("reports-content").style.display = "none";
+        document.getElementById("profile-content").style.display = "none";
+      }
+      function showApproval() {
+        document.getElementById("dashboard-content").style.display = "none";
+        document.getElementById("submit-request-form").style.display = "none";
+        document.getElementById("track-requests-content").style.display =
+          "none";
+        document.getElementById("approval-content").style.display = "block";
+        document.getElementById("reports-content").style.display = "none";
+        document.getElementById("profile-content").style.display = "none";
+      }
+      function showReports() {
+        document.getElementById("dashboard-content").style.display = "none";
+        document.getElementById("submit-request-form").style.display = "none";
+        document.getElementById("track-requests-content").style.display =
+          "none";
+        document.getElementById("approval-content").style.display = "none";
+        document.getElementById("reports-content").style.display = "block";
+        document.getElementById("profile-content").style.display = "none";
+      }
+      function showProfile() {
+        document.getElementById("dashboard-content").style.display = "none";
+        document.getElementById("submit-request-form").style.display = "none";
+        document.getElementById("track-requests-content").style.display =
+          "none";
+        document.getElementById("approval-content").style.display = "none";
+        document.getElementById("reports-content").style.display = "none";
+        document.getElementById("profile-content").style.display = "block";
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".nav-link").forEach(function (link) {
+          const text = link.textContent.trim();
+          if (text === "Home") {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              showDashboard();
+            });
+          }
+          if (text.includes("Submit Request")) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              showForm();
+            });
+          }
+          if (text.includes("Track Request")) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              showTrackRequests();
+            });
+          }
+          if (text.includes("Approval Form")) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              showApproval();
+            });
+          }
+          if (text.includes("Reports")) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              showReports();
+            });
+          }
+          if (text.includes("View Profile")) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              showProfile();
+            });
+          }
+        });
+        document.querySelectorAll("button").forEach(function (btn) {
+          const text = btn.textContent.trim();
+          if (text === "Access Submit Request") {
+            btn.addEventListener("click", function (e) {
+              e.preventDefault();
+              showForm();
+            });
+          }
+          if (text === "Access Track Request") {
+            btn.addEventListener("click", function (e) {
+              e.preventDefault();
+              showTrackRequests();
+            });
+          }
+          if (text === "Access Approval Form") {
+            btn.addEventListener("click", function (e) {
+              e.preventDefault();
+              showApproval();
+            });
+          }
+          if (text === "Access Reports") {
+            btn.addEventListener("click", function (e) {
+              e.preventDefault();
+              showReports();
+            });
+          }
+          if (text === "Access View Profile") {
+            btn.addEventListener("click", function (e) {
+              e.preventDefault();
+              showProfile();
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
