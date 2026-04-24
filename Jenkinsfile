@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "saurabhrajput8294/travel_portal"
         DOCKER_CREDENTIALS = "docker_credentials"
-        EC2_IP = "13.203.38.132"
+        EC2_IP = "13.206.173.180"
     }
 
     stages {
