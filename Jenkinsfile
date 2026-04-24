@@ -11,7 +11,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/PrakharVS/CICD.git'
+                git branch: 'master', url: 'https://github.com/Saurabhrajput8294/travel_portal.git'
             }
         }
 
