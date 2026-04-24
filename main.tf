@@ -30,7 +30,7 @@ resource "null_resource" "deploy" {
       "sudo docker rm portfolio || true",
 
       # Pull latest image
-      "sudo docker pull prakharvs/portfolio:latest",
+      "sudo docker pull saurabhrajput8294/travel_portal:latest",
 
       # Run container
       "sudo docker run -d -p 80:80 --name travel-app saurabhrajput8294/travel_portal:latest"
